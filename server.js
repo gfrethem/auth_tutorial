@@ -16,6 +16,31 @@ var session      = require('express-session');
 
 var configDB = require('./config/database.js');
 
+// Twitter Node Module =========================================================
+
+var Twitter = require('twitter');
+
+
+var client = new Twitter({
+    consumer_key: 'ipcoEpKbdVbSMsT7z1hvQpRpP',
+    consumer_secret: 'h5PI22ZOx4GFj6ZP6T0t0gonYW9PFUhgV4GeCv5okkF0uBVd1q',
+    access_token_key: '48540710-oJ5KzBSiUV8G9xyQ8WO2tRpOWD3t3k53oTuS9Muim',
+    access_token_secret: '9pMnKBXqMFVabKjU6v2ob4svoymgsXf28RcTNNnF5VCwX'
+});
+
+
+client.get('/users/show', {screen_name: 'GSeven330'}, function(error, tweets, response){
+    console.log(tweets.profile_image_url);
+    //dataArray = tweets;
+    //console.log(response, error);
+    //console.log(dataArray);
+    //for(var i = 0; i < dataArray.length; i++){
+    //    console.log(dataArray[i].user.name);
+    //    console.log(dataArray[i].text);
+    //}
+});
+
+
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
