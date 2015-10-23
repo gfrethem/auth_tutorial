@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app = "DigitalSongbook">
+<head>
+    <title>Digital Songbook</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="jquery.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="client.js"></script>
+</head>
+<body ng-controller="DigitalSongbookController">
+<header>
+    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    <img src={{userTwitPic}}>
+    <p>{{twitterHandle}}</p>
+
+</header>
+<main>
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1>Digital Songbook</h1>
+
+Thank you for logging in <span id="twitHandle"><%= user.twitter.username %></span>!
+
+    </div>
+
+</div>
+</main>
+<footer>
+{{djinfo.twitter.displayName}} - @{{djinfo.twitter.username}}
+    <img src="{{djTwitPic}}">
+</footer>
+</body>
+</html>   

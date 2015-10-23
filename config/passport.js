@@ -1,7 +1,6 @@
 // config/passport.js
 
 // load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 
 // load up the user model
@@ -67,6 +66,7 @@ module.exports = function(passport) {
                         newUser.twitter.username    = profile.username;
                         newUser.twitter.displayName = profile.displayName;
                         newUser.twitter.imageUrl    = "";
+                        newUser.isAdmin             = false;
 
                         // save our user into the database
                         newUser.save(function(err) {

@@ -2,6 +2,7 @@
 
 // set up ======================================================================
 // get all the tools we need
+require('dotenv').load();
 var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
@@ -15,31 +16,32 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
-
+//var User            = require('./app/models/user');
 // Twitter Node Module =========================================================
 
 var Twitter = require('twitter');
 
 
 var client = new Twitter({
-    consumer_key: 'ipcoEpKbdVbSMsT7z1hvQpRpP',
-    consumer_secret: 'h5PI22ZOx4GFj6ZP6T0t0gonYW9PFUhgV4GeCv5okkF0uBVd1q',
-    access_token_key: '48540710-oJ5KzBSiUV8G9xyQ8WO2tRpOWD3t3k53oTuS9Muim',
-    access_token_secret: '9pMnKBXqMFVabKjU6v2ob4svoymgsXf28RcTNNnF5VCwX'
+    consumer_key: process.env.twitter_consumer_key,
+    consumer_secret: process.env.twitter_consumer_secret,
+    access_token_key: process.env.twitter_access_token_key,
+    access_token_secret: process.env.twitter_access_token_secret
 });
 
 
-client.get('/users/show', {screen_name: 'GSeven330'}, function(error, tweets, response){
-    console.log(tweets.profile_image_url);
-    //dataArray = tweets;
-    //console.log(response, error);
-    //console.log(dataArray);
-    //for(var i = 0; i < dataArray.length; i++){
-    //    console.log(dataArray[i].user.name);
-    //    console.log(dataArray[i].text);
-    //}
-});
 
+app.get('/getImageURL/:screenName', function(request, response, next) {
+
+    client.get('/users/show', {screen_name: request.params.screenName}, function(error, tweets){
+        twitterData = tweets.profile_image_url;
+            //console.log(twitterData);
+            response.json(twitterData);
+            return twitterData;
+
+    });
+
+});
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
@@ -51,7 +53,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+//app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -67,3 +69,5 @@ app.listen(port);
 console.log('The magic happens on port ' + port);
 
 app.use(express.static(__dirname + '/views'));
+
+module.exports = client;

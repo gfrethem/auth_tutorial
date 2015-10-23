@@ -1,0 +1,25 @@
+header {
+    height: 48px;
+}
+
+header p {
+    float: right;
+}
+
+header img {
+    float:right;
+    margin: 0 auto;
+}
+
+main {
+    margin: 20px;
+}
+
+footer {
+    height: 48px;
+}
+
+footer img {
+    float: left;
+    margin: 0 auto;
+}

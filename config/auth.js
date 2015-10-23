@@ -13,8 +13,8 @@ module.exports = {
     //},
 
     'twitterAuth' : {
-        'consumerKey'       : 'ipcoEpKbdVbSMsT7z1hvQpRpP',
-        'consumerSecret'    : 'h5PI22ZOx4GFj6ZP6T0t0gonYW9PFUhgV4GeCv5okkF0uBVd1q',
+        'consumerKey'       : process.env.twitter_consumer_key,
+        'consumerSecret'    : process.env.twitter_consumer_secret,
         'callbackURL'       : 'http://localhost:8080/auth/twitter/callback'
     }
 
