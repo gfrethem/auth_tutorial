@@ -1,36 +1,106 @@
 <!doctype html>
-<html ng-app = "DigitalSongbook">
+<html ng-app="DigitalSongbook">
 <head>
     <title>Digital Songbook</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="stylesheet.css">
     <script src="jquery.js"></script>
     <script src="angular.min.js"></script>
     <script src="client.js"></script>
 </head>
 <body ng-controller="DigitalSongbookController">
-<header>
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+<header ng-click="showMenu=!showMenu">
     <img src={{userTwitPic}}>
-    <p>{{twitterHandle}}</p>
+    <p id="twitHandle"><%= user.twitter.username %></p>
 
-</header>
-<main>
-<div class="container">
-
-    <div class="jumbotron text-center">
-        <h1>Digital Songbook</h1>
-
-Thank you for logging in <span id="twitHandle"><%= user.twitter.username %></span>!
-
+    <div ng-show="showMenu">
+        <div ng-click="gotoQueue()">Current Queue</div>
+        <div ng-click="gotoSearchSong()">Search Songs</div>
+        <div ng-click="gotoSavedSongs()">Saved Songs</div>
+        <div ng-click="gotoSongHistory()">Song History</div>
+        <div ng-click=""><a href="/logout">Sign Out</a></div>
     </div>
 
-</div>
+</header>
+
+<main>
+    <div class="container">
+
+        <div ng-hide="hideWelcome || isAdmin" class="text-center">
+            <h1>Current Queue</h1>
+            <ul>
+                <li ng-repeat="singer in queue">@{{singer.singer}}</li>
+            </ul>
+        </div>
+
+        <div ng-show="showAdmin" class="text-center">
+            <h1>Current Queue</h1>
+            <ul>
+                <li ng-repeat="singer in queue">@{{singer.singer}} - {{singer.song.artist}} - {{singer.song.title}}
+                    <i class="fa fa-check-square-o" ng-click="markSung(singer)"></i>
+                    <i class="fa fa-times" ng-click="removeSong(singer)"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div ng-show="showSongSearch" class="text-center">
+            <h1>Song Search</h1>
+            <p id="songsearch">
+                <span ng-click="showArtistSearch=false">Search by Song</span> |
+                <span ng-click="showArtistSearch=true">Search by Artist</span>
+            </p>
+
+            <div ng-hide="showArtistSearch">
+                <form novalidate>
+                    <input type="text" id="title" ng-model="songTitle" placeholder="Song Title">
+                    <input type="submit" ng-click="getSongByTitle(songTitle)" value="Search">
+                </form>
+            </div>
+            <div ng-show="showArtistSearch">
+                <form novalidate>
+                    <input type="text" id="artist" ng-model="songArtist" placeholder="Artist Name">
+                    <input type="submit" ng-click="getSongByArtist(songArtist)" value="Search">
+                </form>
+            </div>
+
+            <div>
+                <ul>
+                    <li ng-repeat="song in songs" ng-click="formShow=!formShow">{{song.title}} - {{song.artist}}
+                        <form novalidate ng-show="formShow">
+                            <input type="submit" ng-click="tweetRequest(song)" value="Request">
+                            <input type="submit" ng-click="saveSong(song)" value="Save">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div ng-show="showSongHistory" class="text-center">
+            <h1>Song History</h1>
+            <ul>
+                <li ng-repeat="song in history">{{song.song.title}} - {{song.song.artist}} - {{song.performedDate | date:'longDate'}}</li>
+            </ul>
+        </div>
+
+        <div ng-show="showSavedSongs" class="text-center">
+            <h1>Saved Songs</h1>
+            <ul>
+                <li ng-repeat="savedSong in savedSongs">{{savedSong.song.title}} - {{savedSong.song.artist}}
+                    <form novalidate>
+                        <input type="submit" ng-click="tweetRequest(savedSong.song)" value="Request">
+                        <input type="submit" ng-click="removeSavedSong(savedSong)" value="Delete">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
 </main>
 <footer>
-{{djinfo.twitter.displayName}} - @{{djinfo.twitter.username}}
-    <img src="{{djTwitPic}}">
+    @{{djinfo.twitter.username}}
+    <img src={{djTwitPic}}>
 </footer>
 </body>
 </html>   

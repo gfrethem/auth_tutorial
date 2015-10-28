@@ -31,18 +31,6 @@ var client = new Twitter({
 
 
 
-app.get('/getImageURL/:screenName', function(request, response, next) {
-
-    client.get('/users/show', {screen_name: request.params.screenName}, function(error, tweets){
-        twitterData = tweets.profile_image_url;
-            //console.log(twitterData);
-            response.json(twitterData);
-            return twitterData;
-
-    });
-
-});
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -53,7 +41,7 @@ app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
 
-//app.set('view engine', 'ejs'); // set up ejs for templating
+app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -67,6 +55,33 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 // launch ======================================================================
 app.listen(port);
 console.log('The magic happens on port ' + port);
+
+
+
+app.get('/getImageURL/:screenName', function(request, response, next) {
+
+    client.get('/users/show', {screen_name: request.params.screenName}, function(error, tweets){
+        twitterData = tweets.profile_image_url;
+        //console.log(twitterData);
+        response.json(twitterData);
+        return twitterData;
+
+    });
+
+});
+
+app.post('/requestSong', function(request, response, next) {
+    //console.log(request.body);
+    client.post('statuses/update', {status: request.body.text}, function(error, tweet){
+        if (!error) {
+            console.log(tweet);
+        } else {
+            console.log(error);
+        }
+        response.send("OK");
+    });
+});
+
 
 app.use(express.static(__dirname + '/views'));
 
