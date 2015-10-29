@@ -74,17 +74,20 @@ header {
     color: #a8306e;
     border: 2px solid #a8306e;
     font-weight: bold;
-    animation: name 3s infinite;
+    background-color: #1144bd;
+    animation: menu 4s infinite;
 }
 
-@keyframes name {
+@keyframes menu {
     0% {
-        background-color: black;
+        background-color: #000;
     }
     100% {
-        background-color: #1144bd
+        background-color: #1144bd;
     }
 }
+
+
 
 header p {
     float: right;
@@ -115,11 +118,42 @@ header div a:visited {
     text-decoration: none;
 }
 
-h1 {
+.dsmenu {
+    position: fixed;
+    top: 33px;
+    right: 1px;
+    z-index: 5;
+}
+
+.dsmenu div:hover {
+    background-color: lightgray;
+}
+
+h1, h5 {
     font-family: fjalla one, sans-serif;
     background-color: #000;
     color: #a8306e;
     border: 2px solid #fff;
+}
+
+.startHere {
+    /*float: right;*/
+    margin: 2px 0 0 0;
+    font-size: large;
+    font-family: permanent marker, sans-serif;
+    position: fixed;
+    right: 130px;
+    z-index: 10;
+    animation: startHere 1s infinite;
+}
+
+@keyframes startHere {
+    0% {
+        color: #e8b924;
+    }
+    100% {
+        color: #009412
+    }
 }
 
 #songsearch {

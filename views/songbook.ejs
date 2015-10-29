@@ -12,12 +12,15 @@
 </head>
 <body ng-controller="DigitalSongbookController">
 
-<header ng-click="showMenu=!showMenu">
+<div ng-show="showStartHere" class="startHere"><p>Click here to begin --></p></div>
+
+<header ng-click="showStartHere = false;showMenu=!showMenu">
+
     <img src={{userTwitPic}}>
 
     <p id="twitHandle"><%= user.twitter.username %></p>
 
-    <div ng-show="showMenu">
+    <div ng-show="showMenu" class="dsmenu">
         <div ng-click="gotoQueue()">Current Queue</div>
         <div ng-click="gotoSearchSong()">Search Songs</div>
         <div ng-click="gotoSavedSongs()">Saved Songs</div>

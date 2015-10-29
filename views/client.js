@@ -9,6 +9,7 @@ app.controller('DigitalSongbookController', ['$scope', '$http', function ($scope
     ////Initialize Show/Hides
     //$scope.hideSongSearch = true;
     $scope.isAdmin = false;
+    $scope.showStartHere = true;
     $scope.song = {};
     $scope.songs = [];
     $scope.singer = {};
@@ -139,12 +140,12 @@ app.controller('DigitalSongbookController', ['$scope', '$http', function ($scope
         ////////////////////////////////////////////
         // This would be where it tweets the request
         ////////////////////////////////////////////
-        //var message = "@" + $scope.twitterHandle + " would like to sing " + song.title + " by " + song.artist + " at @"
-        //    + $scope.djinfo.twitter.username + "'s Karaoke!";
-        //var messageObj = {text: message};
-        //$http.post('/requestSong', messageObj).then(function(response) {
-        //    alert('Request Sent via Twitter!');
-        //});
+        var message = "@" + $scope.twitterHandle + " would like to sing " + song.title + " by " + song.artist + " at @"
+            + $scope.djinfo.twitter.username + "'s Karaoke!";
+        var messageObj = {text: message};
+        $http.post('/requestSong', messageObj).then(function(response) {
+            alert('Request Sent via Twitter!');
+        });
     };
 
     $scope.saveSong = function (song) {
