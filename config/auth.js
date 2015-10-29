@@ -16,7 +16,7 @@ module.exports = {
     'twitterAuth' : {
         'consumerKey'       : process.env.twitter_consumer_key,
         'consumerSecret'    : process.env.twitter_consumer_secret,
-        'callbackURL'       : 'http://10.100.100.33:5000/auth/twitter/callback'
+        'callbackURL'       : 'http://sleepy-escarpment-7806.herokuapp.com/auth/twitter/callback'
     }
 
     //'googleAuth' : {
