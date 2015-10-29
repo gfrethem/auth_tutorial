@@ -6,6 +6,7 @@
 // expose our config directly to our application using module.exports
 module.exports = {
 
+
     //'facebookAuth' : {
     //    'clientID'      : 'your-secret-clientID-here', // your App ID
     //    'clientSecret'  : 'your-client-secret-here', // your App Secret
@@ -15,7 +16,7 @@ module.exports = {
     'twitterAuth' : {
         'consumerKey'       : process.env.twitter_consumer_key,
         'consumerSecret'    : process.env.twitter_consumer_secret,
-        'callbackURL'       : 'http://localhost:8080/auth/twitter/callback'
+        'callbackURL'       : 'http://10.100.100.33:5000/auth/twitter/callback'
     }
 
     //'googleAuth' : {

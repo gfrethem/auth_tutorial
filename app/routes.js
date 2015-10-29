@@ -76,14 +76,14 @@ module.exports = function (app, passport) {
         })
     });
 
-    app.post('/saveHistory', function(request, response, next) {
+    app.post('/saveHistory', function (request, response, next) {
         var newDJHistory = new DJHistory(request.body);
         newDJHistory.save();
         console.log('History DB entry: ', request.body);
         response.send("ok");
     });
 
-    app.post('/saveSong', function(request, response, next) {
+    app.post('/saveSong', function (request, response, next) {
         var newSavedSong = new SavedSongs(request.body);
         newSavedSong.save();
         console.log('Saved Song DB entry: ', request.body);
@@ -92,44 +92,45 @@ module.exports = function (app, passport) {
 
     app.get('/getQueue', function (request, response, next) {
         DJHistory.find({performed: false}, function (err, singers) {
+            console.log("Queue Refreshed");
             response.json(singers);
         })
 
     });
 
-    app.post('/markSung', function(request, response, next) {
-        console.log(request.body);
+    app.post('/markSung', function (request, response, next) {
+        console.log("Marked " + request.body.song.title + " by " + request.body.song.artist + " as performed by "
+            + request.body.singer);
         var receivedData = request.body;
-        DJHistory.findById(receivedData._id, function(err, djhistory) {
+        DJHistory.findById(receivedData._id, function (err, djhistory) {
             if (err) throw err;
             djhistory.performed = true;
             djhistory.performedDate = new Date;
-            djhistory.save(function(err) {
+            djhistory.save(function (err) {
                 if (err) throw err;
                 response.send("OK");
             })
         })
     });
 
-    app.post('/removeSong', function(request, response, next) {
-        console.log("Removing " + request.body.song.title + " by " + request.body.song.artist);
+    app.post('/removeSong', function (request, response, next) {
+        console.log("Removing " + request.body.song.title + " by " + request.body.song.artist + " from Queue");
         var receivedData = request.body;
-        DJHistory.remove({_id: receivedData._id}, function() {
-                response.send("OK");
+        DJHistory.remove({_id: receivedData._id}, function () {
+            response.send("OK");
         })
     });
 
-    app.post('/removeSavedSong', function(request, response, next) {
+    app.post('/removeSavedSong', function (request, response, next) {
         console.log("Removing " + request.body.song.title + " by " + request.body.song.artist
             + " from " + request.body.singer + "'s Saved Songs.");
         var receivedData = request.body;
-        SavedSongs.remove({_id: receivedData._id}, function() {
+        SavedSongs.remove({_id: receivedData._id}, function () {
             response.send("OK");
         })
     });
 
 };
-
 
 
 // route middleware to make sure a user is logged in

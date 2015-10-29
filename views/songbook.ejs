@@ -1,6 +1,7 @@
 <!doctype html>
 <html ng-app="DigitalSongbook">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Songbook</title>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -13,6 +14,7 @@
 
 <header ng-click="showMenu=!showMenu">
     <img src={{userTwitPic}}>
+
     <p id="twitHandle"><%= user.twitter.username %></p>
 
     <div ng-show="showMenu">
@@ -47,6 +49,7 @@
 
         <div ng-show="showSongSearch" class="text-center">
             <h1>Song Search</h1>
+
             <p id="songsearch">
                 <span ng-click="showArtistSearch=false">Search by Song</span> |
                 <span ng-click="showArtistSearch=true">Search by Artist</span>
@@ -81,7 +84,9 @@
         <div ng-show="showSongHistory" class="text-center">
             <h1>Song History</h1>
             <ul>
-                <li ng-repeat="song in history">{{song.song.title}} - {{song.song.artist}} - {{song.performedDate | date:'longDate'}}</li>
+                <li ng-repeat="song in history">{{song.song.title}} - {{song.song.artist}} - {{song.performedDate |
+                    date:'longDate'}}
+                </li>
             </ul>
         </div>
 
@@ -99,7 +104,7 @@
     </div>
 </main>
 <footer>
-    @{{djinfo.twitter.username}}
+    {{djinfo.twitter.username}}'s Karaoke
     <img src={{djTwitPic}}>
 </footer>
 </body>

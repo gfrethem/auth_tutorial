@@ -3,17 +3,17 @@
 // set up ======================================================================
 // get all the tools we need
 require('dotenv').load();
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8080;
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 5000;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
-var morgan       = require('morgan');
+var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var configDB = require('./config/database.js');
 //var User            = require('./app/models/user');
@@ -30,7 +30,6 @@ var client = new Twitter({
 });
 
 
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -44,7 +43,7 @@ app.use(bodyParser()); // get information from html forms
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({secret: 'ilovescotchscotchyscotchscotch'})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -57,10 +56,9 @@ app.listen(port);
 console.log('The magic happens on port ' + port);
 
 
+app.get('/getImageURL/:screenName', function (request, response, next) {
 
-app.get('/getImageURL/:screenName', function(request, response, next) {
-
-    client.get('/users/show', {screen_name: request.params.screenName}, function(error, tweets){
+    client.get('/users/show', {screen_name: request.params.screenName}, function (error, tweets) {
         twitterData = tweets.profile_image_url;
         //console.log(twitterData);
         response.json(twitterData);
@@ -70,9 +68,9 @@ app.get('/getImageURL/:screenName', function(request, response, next) {
 
 });
 
-app.post('/requestSong', function(request, response, next) {
+app.post('/requestSong', function (request, response, next) {
     //console.log(request.body);
-    client.post('statuses/update', {status: request.body.text}, function(error, tweet){
+    client.post('statuses/update', {status: request.body.text}, function (error, tweet) {
         if (!error) {
             console.log(tweet);
         } else {
