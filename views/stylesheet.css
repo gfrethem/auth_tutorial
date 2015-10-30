@@ -76,6 +76,7 @@ header {
     font-weight: bold;
     background-color: #1144bd;
     animation: menu 4s infinite;
+    cursor: pointer;
 }
 
 @keyframes menu {
@@ -156,6 +157,9 @@ h1, h5 {
     }
 }
 
+i {
+    cursor: pointer;
+}
 #songsearch {
     width: 220px;
     font-family: fjalla one, sans-serif;
@@ -164,6 +168,14 @@ h1, h5 {
     border: 2px solid #fff;
     padding: 5px;
     margin: 0 auto 15px;
+}
+
+#songsearch span {
+    cursor: pointer;
+}
+
+.songSearchResults li {
+    cursor: pointer;
 }
 
 li:nth-of-type(odd) {
