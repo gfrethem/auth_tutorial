@@ -88,8 +88,6 @@ header {
     }
 }
 
-
-
 header p {
     float: right;
 }
@@ -138,7 +136,6 @@ h1, h5 {
 }
 
 .startHere {
-    /*float: right;*/
     margin: 2px 0 0 0;
     font-size: large;
     font-family: permanent marker, sans-serif;
@@ -160,6 +157,7 @@ h1, h5 {
 i {
     cursor: pointer;
 }
+
 #songsearch {
     width: 220px;
     font-family: fjalla one, sans-serif;
