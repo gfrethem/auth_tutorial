@@ -7,5 +7,5 @@ module.exports = {
     //'url' : 'mongodb://localhost:27017/auth_tutorial'
 
     // Heroku
-    'url' : 'ds045734.mongolab.com:45734/digitalsongbook'
+    'url' : 'mongodb://digitalsongbook:epsilonrocks@ds045734.mongolab.com:45734/digitalsongbook'
 };
