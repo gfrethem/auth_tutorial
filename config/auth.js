@@ -16,7 +16,12 @@ module.exports = {
     'twitterAuth' : {
         'consumerKey'       : process.env.twitter_consumer_key,
         'consumerSecret'    : process.env.twitter_consumer_secret,
-        'callbackURL'       : 'http://10.100.100.22:5000/auth/twitter/callback'
+
+        // Local
+        'callbackURL'       : 'http://192.168.0.7:5000/auth/twitter/callback'
+
+        // Heroku
+        //'callbackURL'       : 'http://192.168.0.7:5000/auth/twitter/callback'
     }
 
     //'googleAuth' : {

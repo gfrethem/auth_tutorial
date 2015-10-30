@@ -6,3 +6,4 @@ angular.*
 bootstrap*
 font-awes*
 dump/
+*.log

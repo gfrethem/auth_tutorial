@@ -157,7 +157,7 @@ h1, h5 {
 }
 
 #songsearch {
-    width: 200px;
+    width: 220px;
     font-family: fjalla one, sans-serif;
     background-color: #000;
     color: #e8b924;
@@ -190,7 +190,7 @@ li:nth-of-type(even) {
 
 footer {
     margin: 25px auto 0 0;
-    width: 175px;
+    width: 180px;
     height: 32px;
     color: #009412;
     font-weight: bold;

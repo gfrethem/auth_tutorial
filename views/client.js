@@ -111,6 +111,13 @@ app.controller('DigitalSongbookController', ['$scope', '$http', function ($scope
         })
     };
 
+    $scope.listAllSongs = function (artist) {
+        $http.get('/getSongs/All').then(function (response) {
+            $scope.songs = response.data;
+            //console.log($scope.songs);
+        })
+    };
+
     $scope.getQueue = function () {
         $http.get('/getQueue').then(function (response) {
             $scope.queue = response.data;

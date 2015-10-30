@@ -62,6 +62,13 @@ module.exports = function (app, passport) {
         })
     });
 
+    app.get('/getSongs/All', function (request, response, next) {
+        Song.find({}).sort('artist').exec(function (err, songs) {
+            console.log('User requested a list of all songs');
+            response.json(songs);
+        })
+    });
+
     app.get('/getHistory/:query', function (request, response, next) {
         DJHistory.find({singer: request.params.query, performed: true}, function (err, history) {
             console.log('History search for user: ', request.params.query);
