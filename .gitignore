@@ -2,8 +2,8 @@
 .idea
 node_modules
 .env
-angular.*
-bootstrap*
+#angular.*
+#bootstrap*
 font-awes*
 dump/
 *.log
