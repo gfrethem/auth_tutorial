@@ -12,14 +12,19 @@
 </head>
 <body ng-controller="DigitalSongbookController">
 
+<!--This is to guide first time users to the menu-->
 <div ng-show="showStartHere" class="startHere"><p>Click here to begin --></p></div>
 
+<!--Once a user clicks on the menu the "Start Here" is hidden. On second click the menu is hidden.-->
 <header ng-click="showStartHere = false;showMenu=!showMenu">
 
+    <!--Users's Twitter Picture-->
     <img src={{userTwitPic}}>
 
+    <!--Displays User's twitter handle that was passed in through the template. -->
     <p id="twitHandle"><%= user.twitter.username %></p>
 
+    <!--The Menu-->
     <div ng-show="showMenu" class="dsmenu">
         <div ng-click="gotoQueue()">Current Queue</div>
         <div ng-click="gotoSearchSong()">Search Songs</div>
@@ -33,6 +38,7 @@
 <main>
     <div class="container">
 
+        <!--The Song Queue - Default screen. Hidden if user is the admin.-->
         <div ng-hide="hideWelcome || isAdmin" class="text-center">
             <h1>Current Queue</h1>
             <ul>
@@ -40,6 +46,7 @@
             </ul>
         </div>
 
+        <!--Admin view of the Song Queue-->
         <div ng-show="showAdmin" class="text-center">
             <h1>Current Queue</h1>
             <ul>
@@ -50,21 +57,26 @@
             </ul>
         </div>
 
+        <!--The Song Search-->
         <div ng-show="showSongSearch" class="text-center">
             <h1>Song Search</h1>
 
+            <!--Choose to search by Song, Artist, or list all. -->
             <p id="songsearch">
                 <span ng-click="showArtistSearch=false">Search by Song</span> |
                 <span ng-click="showArtistSearch=true">Search by Artist</span> |
                 <span ng-click="listAllSongs()">All</span>
             </p>
 
+            <!--Artist Search - Hidden if searching by Title-->
             <div ng-hide="showArtistSearch">
                 <form novalidate>
                     <input type="text" id="title" ng-model="songTitle" placeholder="Song Title">
                     <input type="submit" ng-click="getSongByTitle(songTitle)" value="Search">
                 </form>
             </div>
+
+            <!--Title Search - Hidden if searching by Artist-->
             <div ng-show="showArtistSearch">
                 <form novalidate>
                     <input type="text" id="artist" ng-model="songArtist" placeholder="Artist Name">
@@ -72,6 +84,7 @@
                 </form>
             </div>
 
+            <!--Song Search Results-->
             <div class="songSearchResults">
                 <ul>
                     <li ng-repeat="song in songs" ng-click="formShow=!formShow">{{song.title}} - {{song.artist}}
@@ -82,9 +95,9 @@
                     </li>
                 </ul>
             </div>
-
         </div>
 
+        <!--Song History-->
         <div ng-show="showSongHistory" class="text-center">
             <h1>Song History</h1>
             <ul>
@@ -94,6 +107,7 @@
             </ul>
         </div>
 
+        <!--User's Saved Songs-->
         <div ng-show="showSavedSongs" class="text-center">
             <h1>Saved Songs</h1>
             <ul>
@@ -108,6 +122,7 @@
     </div>
 </main>
 <footer>
+    <!--DJ's Twitter Name & Twitter Picture-->
     {{djinfo.twitter.username}}'s Karaoke
     <img src={{djTwitPic}}>
 </footer>

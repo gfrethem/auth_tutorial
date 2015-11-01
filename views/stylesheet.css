@@ -133,6 +133,7 @@ h1, h5 {
     background-color: #000;
     color: #a8306e;
     border: 2px solid #fff;
+    transform: skewX(-5deg);
 }
 
 .startHere {
@@ -185,6 +186,8 @@ li:nth-of-type(odd) {
     padding: 5px 25px;
     margin: 10px 35% 0 0;
     float: left;
+    transform: skewX(4deg);
+
 }
 
 li:nth-of-type(even) {
@@ -196,6 +199,8 @@ li:nth-of-type(even) {
     float: right;
     padding: 5px 25px;
     margin: 10px 0 0 35%;
+    transform: skewX(-4deg);
+
 }
 
 footer {
