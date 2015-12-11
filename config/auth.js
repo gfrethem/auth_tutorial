@@ -18,10 +18,10 @@ module.exports = {
         'consumerSecret'    : process.env.twitter_consumer_secret,
 
         // Local
-        //'callbackURL'       : 'http://192.168.0.7:5000/auth/twitter/callback'
+        'callbackURL'       : 'http://localhost:5000/auth/twitter/callback'
 
         // Heroku
-        'callbackURL'       : 'http://sleepy-escarpment-7806.herokuapp.com/auth/twitter/callback'
+        //'callbackURL'       : 'http://sleepy-escarpment-7806.herokuapp.com/auth/twitter/callback'
     }
 
     //'googleAuth' : {
